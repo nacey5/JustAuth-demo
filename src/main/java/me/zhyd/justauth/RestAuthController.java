@@ -17,6 +17,7 @@ import me.zhyd.oauth.request.*;
 import me.zhyd.oauth.utils.AuthScopeUtils;
 import me.zhyd.oauth.utils.AuthStateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -48,6 +49,10 @@ public class RestAuthController {
     private AuthStateRedisCache stateRedisCache;
     @Autowired
     private UserService userService;
+    @Value("${gitee.clientId}")
+    private String clientId;
+    @Value("${gitee.clientSecret}")
+    private String clientSecret;
 
     @RequestMapping("/render/{source}")
     @ResponseBody
@@ -158,8 +163,8 @@ public class RestAuthController {
                 break;
             case "github":
                 authRequest = new AuthGithubRequest(AuthConfig.builder()
-                        .clientId("")
-                        .clientSecret("")
+                        .clientId("7e5c904c04bda2841a46")
+                        .clientSecret("28fce7ca098a828274f7cf1d8fd66eddccd508b9")
                         .redirectUri("http://localhost:8443/oauth/callback/github")
                         .scopes(AuthScopeUtils.getScopes(AuthGithubScope.values()))
                         // 针对国外平台配置代理
@@ -171,8 +176,8 @@ public class RestAuthController {
                 break;
             case "gitee":
                 authRequest = new AuthGiteeRequest(AuthConfig.builder()
-                        .clientId("")
-                        .clientSecret("")
+                        .clientId(clientId)
+                        .clientSecret(clientSecret)
                         .redirectUri("http://127.0.0.1:8443/oauth/callback/gitee")
                         .scopes(AuthScopeUtils.getScopes(AuthGiteeScope.values()))
                         .build(), stateRedisCache);

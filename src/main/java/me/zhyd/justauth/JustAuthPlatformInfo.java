@@ -18,6 +18,7 @@ public enum JustAuthPlatformInfo {
      */
     GITEE("Gitee", "", "", "v1.0.1", false),
     BAIDU("百度", "", "", "v1.0.1", false),
+    WECHAT("微信登录", "", "", "v1.0.1",false),
     CODING("coding", "", "", "v1.0.1", false),
     CSDN("CSDN", "", "", "v1.0.1", false),
     DINGTALK("钉钉扫码登录", "", "", "v1.0.1", false),
